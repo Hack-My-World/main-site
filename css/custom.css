@@ -1,0 +1,22 @@
+.post-title a:hover {
+   color:#004241;
+}
+
+/* a.post-link{ */
+/*     color: #006664; */
+/* } */
+/* a.post-link:visited{ */
+/*     color:#004241 */
+
+/* } */
+
+.post-body img {
+    display:block;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+
+.post-body pre{
+}
+
