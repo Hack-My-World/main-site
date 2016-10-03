@@ -56,10 +56,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="../index.html">Home</a>
+                        <a href="http://kabla.me/blog">Home</a>
                     </li>
                     <li>
-                        <a href="index.html">Writeups</a>
+                        <a href="http://kabla.me/blog/writeups">Writeups</a>
+                    </li>
+                    <li>
+                         <a href="http://kabla.me/blog/projects">Projects</a>
                     </li>
                 </ul>
             </div>
@@ -70,10 +73,10 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../img/home-bg.jpg')">
+    <header class="intro-header" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-6 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>MMA CTF</h1>
                         <h2 class="subheading">Tokyo Westerns/MMA CTF 2nd 2016</h2>
@@ -88,7 +91,7 @@
     <article>
         <div class="container">
             <div class="row">
-                <div class="post-body col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-body col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2">
 
 <!-- Judgement -->
 
@@ -96,15 +99,15 @@
 
     <p>
     After opening the binary up in IDA, it was pretty obvious that we needed to exploit a format string vulnerability.
-    <img src="../img/mma.2016.judgement.main.png" alt="main">
+    <img src="../img/mma.2016.judgement.main.png" alt="main" align = "middle" >
     It looks like the flag was declared as a global variable, which means it will have a static address in the <code>.bss</code> Section. This definitely makes our lives easier. 
-        <img src="../img/mma.2016.judgement.flag.png" alt="flag" >
+        <img src="../img/mma.2016.judgement.flag.png" alt="flag" align = "middle" >
     So the flag is at <code>0x804a0a0</code>. At first I thought I could supply the format string 
     <code>
         \xa0\xa0\x04\x08%4$s
     </code>
     which would just print the flag, but then I realized that would not work, since the <code>getline()</code> function ensures that every character is printable.
-     <img src="../img/mma.2016.judgement.getline.png" alt="get-line">
+     <img src="../img/mma.2016.judgement.getline.png" alt="get-line" align = "middle" >
 
         The next thing I checked was if the address of the flag is anywhere on the stack when <code>printf()</code> is called.
         <pre>
@@ -126,9 +129,9 @@ Input flag >> %28$s
     <p>
         I found an unintended solution to this one, so I was pretty happy about that. The contents of the flag leads me to believe that I was intended to reverse a substitution cypher. But anyways, here is my solution. It was pretty obvious that I was dealing with some kind of cypher.
 
-        <img src="../img/mma.2016.reverse_box.main.png" alt="">
+        <img src="../img/mma.2016.reverse_box.main.png" alt="" align = "middle" >
         The most important function here is the one that I named <code>getRandStuff()</code>. All it seemed to do was populate <code>v5</code> with random bytes, which would then be used as substitutions for the characters in the flag and printed. However, the only entropy used to generate the random bytes was <code>srand(time(NULL))</code>.
-        <img src="../img/mma.2016.reverse_box.original.png" alt="010">
+        <img src="../img/mma.2016.reverse_box.original.png" alt="010" align = "middle" >
     </p>
     <p>
     Instead of just the raw binary, they gave us a .7z file. 7-zip preserves the timestamp of the creation of the file. So I figured I should look into that. Running <code>stat</code> on the binary produced the following results:
@@ -151,9 +154,9 @@ hash is independent of every other byte, I would be able to brute force the hash
 </p>
 <p>
 The op-code to move a value into <code>eax</code> is just <code>B8</code>, followed by the four byte value. Of course we have to keep endianness in mind. Since there is extra space between the function prologue and <code>srand()</code>, I just filled all of the extra bytes with <code>0x90</code>.
-    <img src="../img/mma.2016.reverse_box.010.png" alt="010" >
+    <img src="../img/mma.2016.reverse_box.010.png" alt="010" align = "middle" >
         Here is what the assembly looks like after the patch.  
-    <img src="../img/mma.2016.reverse_box.patched.png" alt="patched" >
+    <img src="../img/mma.2016.reverse_box.patched.png" alt="patched" align = "center" >
     Everything looks good to go! 
 </p>
 

@@ -56,10 +56,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="../index.html">Home</a>
+                        <a href="http://kabla.me/blog">Home</a>
                     </li>
                     <li>
-                        <a href="index.html">Writeups</a>
+                        <a href="http://kabla.me/blog/writeups">Writeups</a>
+                    </li>
+                    <li>
+                         <a href="http://kabla.me/blog/projects/">Projects</a>
                     </li>
                 </ul>
             </div>
@@ -70,14 +73,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../img/home-bg.jpg')">
+    <header class="intro-header" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-6 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>CSAW CTF </h1>
                         <h2 class="subheading">
-                            Qualification Round 2016 <img src="../img/csaw.png" alt="csaw" align="right">
+                            Qualification Round 2016 <img src="../img/csaw.png" alt="csaw" align="right"align = "center" align = "center" >
                         </h2>
                         <span class="meta">Posted by <a href="#">kablaa: </a> September, 2016</span>
                     </div>
@@ -90,11 +93,10 @@
     <!-- Challenge List -->
     <div class="container">
         <div class = "row">
-                <div class="post-body col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-body col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2">
                     <div claa = "list-group">
                         <a href="#sleeping_guard" class = "list-group-item">Sleeping Guard <span class ="badge">Crypto-50</span></a>
                         <a href="#warmup" class = "list-group-item">Warmup<span class ="badge">Pwn-50</span></a>
-                        <a href="#gametime" class = "list-group-item">Game Time<span class ="badge">Reversing-50</span></a>
                         <a href="#rock" class = "list-group-item">Rock<span class ="badge">Reversing-100</span></a>
                         <a href="#key" class = "list-group-item">Key<span class ="badge">Reversing-125</span></a>
                     </div>
@@ -107,7 +109,7 @@
     <article>
         <div class="container">
             <div class="row">
-                <div class="post-body col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-body col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2">
 
                     <!-- sleeping Guard -->
 
@@ -145,7 +147,7 @@ out.close()
                             </code>
                         </pre>
                         Which gave me the image with the flag:
-                        <img src="../img/csaw.2016.sleeping_guard.decrypted.png" alt="sleeping">
+                        <img src="../img/csaw.2016.sleeping_guard.decrypted.png" alt="sleeping" align = "center" align = "center" align = "center" >
                     </p>
 
 
@@ -184,11 +186,6 @@ WOW:0x40060d
                     </pre>
                     </p>
                     
-                    <!-- gametime -->
-                    <h1 id="gametime">Game Time (Reversing 50)</h1>
-                    <p>
-                    soon to come
-                    </p>
 
 
                     <!-- Rock -->
@@ -200,13 +197,47 @@ WOW:0x40060d
 struct Rock{
     void *fp;
     int pass_fail;
-    char user_input[16];
-    char flag_str[16];
+    string *user_input1;
+    string *user_input2;
+    string *flag_str;
 };
                             </code>
                         </pre>
                     </p>
-                    Three interesting functions, which I have called <code>init_struct</code>, <code>xor_input</code>, and <code>check</code>
+                    Three interesting functions, which I have called <code>init_struct</code>, <code>check_len_and_xor</code>, and <code>is_valid_key</code>
+                    <h2>init_struct</h2>
+                    <img src="../img/csaw.2016.rock.init_struct.png" alt="init_struct">
+                    This function initializes the fields in the Rock struct. First, the <code>pass_fail</code> field is set to 0 (pass). Then, the user input fields are populated with the string that is provided by the user. Finally, the <code>flag_str</code> field is populated with the string <code>FLAG23456912365453475897834567</code>. 
+                    <h2>check_len_and_xor</h2>
+                    <img src="../img/csaw.2016.rock.check_len_and_xor.png" alt="check_len_and_xor">
+                    This seems to be the function were all of the important stuff happens. First, it checks to make sure the length of the input is <code>0x1e</code> or 30. Then it takes every byte of the input and applies the following changes:
+                    <pre>
+                        <code class="language-Clike">
+for(i = 0; i &lt length(rockStruct -> user_input1); i++{ 
+    rockStruct ->user_input[i] = (rockStruct ->user_input[i] ^ 80) + 20;
+} 
+for(j = 0; j &lt length(rockStruct ->user_input1); j++{ 
+    rockStruct ->user_input[j] = (rockStruct ->user_input[j] ^ 16) + 9;
+} 
+                        </code>
+                    </pre>
+                    <h2>is_valid_key</h2>
+                    <img src="../img/csaw.2016.rock.is_valid_key.png" alt="is_valid_key">
+                    Finally, this function checks each bye of the "encypted" user input against each byte of  <code>FLAG23456912365453475897834567</code>. 
+                    <pre>
+                        <code class="language-Clike">
+for(i = 0; i &lt length(rockStruct->user_input1) ; i++){
+    if(rockStruct->user_input1[i] != rockStruct->flag_str[i]){
+        cout &lt&lt "you did not pass" &lt&lt i;
+        rockStruct->pass_fail = 1;
+        return rockStruct->pass_fail;
+    }
+    cout &lt&lt "pass" &lt&lt i;
+}
+return rockStruct->pass_fail;
+                        </code>
+                    </pre>
+
 
                     <p>
                     Here is my <code>decrypt.py</code> script.
@@ -216,7 +247,7 @@ s1 = "FLAG23456912365453475897834567"
 s2 = ""
 for c in s1:
     x = ord(c)
-    s2 += chr((((x -9)^0x10) - 20)^80)
+    s2 += chr((((x -9)^16) - 20)^80)
 print s2
                         </code>
                     </pre>

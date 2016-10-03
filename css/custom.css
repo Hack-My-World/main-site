@@ -1,6 +1,66 @@
-.post-title a:hover {
-   color:#004241;
+body{
+    color:#ccc;
+    background-color: #262626;
+    font-family: "Lucida Consolel"  ;
 }
+code{
+   background-color:#1a1a1a;
+}
+pre{
+    color: #ffffff;
+    background-color: #141414;
+    border: 1px solid #666666;
+    font-size: 12.5pt;
+}
+img{
+    background-color: #262626;
+    
+}
+h1{
+    color:#00cc99;
+    font-family: "Lucida Consolel",  Monaco, monospace;
+}
+h2{
+    color:#00cc99;
+    font-family: "Lucida Consolel",  Monaco, monospace;
+}
+h3{
+    color:#00cc99;
+    font-family: "Lucida Consolel",  Monaco, monospace;
+}
+a{
+   color:#00cc99;
+}
+a:hover{
+    
+    color: #008060;
+}
+a.list-group-item{
+    color: #00cc99;
+    background-color:#1a1a1a;    
+    border-color: #666
+    
+}
+a.list-group-item-action{
+    color: #0d0d0d;
+}
+
+hr{
+    border-color:#1a1a1a;
+}
+.post-title{
+    color:#00cc99;
+}
+.post-sub-title{
+    color:#404040;
+}
+.post-title:hover {
+   color:#008060;
+}
+.post-sub-title:hover {
+   color:#404040;
+}
+
 
 /* a.post-link{ */
 /*     color: #006664; */
@@ -16,7 +76,4 @@
     padding-bottom:10px;
 }
 
-
-.post-body pre{
-}
 
