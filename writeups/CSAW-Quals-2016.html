@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://kabla.me">Kablaa!</a>
+                <a class="navbar-brand" href="http://kabla.me/blog/">Kablaa!</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -193,7 +193,7 @@ WOW:0x40060d
                     <p>
                         There is a struct in this program.
                         <pre>
-                            <code class='language-clike'>
+                            <code class='language-cpp'>
 struct Rock{
     void *fp;
     int pass_fail;
@@ -212,7 +212,7 @@ struct Rock{
                     <img src="../img/csaw.2016.rock.check_len_and_xor.png" alt="check_len_and_xor">
                     This seems to be the function were all of the important stuff happens. First, it checks to make sure the length of the input is <code>0x1e</code> or 30. Then it takes every byte of the input and applies the following changes:
                     <pre>
-                        <code class="language-Clike">
+                        <code class="language-cpp">
 for(i = 0; i &lt length(rockStruct -> user_input1); i++{ 
     rockStruct ->user_input[i] = (rockStruct ->user_input[i] ^ 80) + 20;
 } 
@@ -225,7 +225,7 @@ for(j = 0; j &lt length(rockStruct ->user_input1); j++{
                     <img src="../img/csaw.2016.rock.is_valid_key.png" alt="is_valid_key">
                     Finally, this function checks each bye of the "encypted" user input against each byte of  <code>FLAG23456912365453475897834567</code>. 
                     <pre>
-                        <code class="language-Clike">
+                        <code class="language-cpp">
 for(i = 0; i &lt length(rockStruct->user_input1) ; i++){
     if(rockStruct->user_input1[i] != rockStruct->flag_str[i]){
         cout &lt&lt "you did not pass" &lt&lt i;
