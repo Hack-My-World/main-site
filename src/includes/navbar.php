@@ -1,8 +1,8 @@
 <?php
 function getNavbar($depth){
-    $pwd = "";
+    $root_dir = "";
     for($i = 0; $i < $depth; $i++){
-        $pwd = $pwd.'../' ;
+        $root_dir = $root_dir.'../' ;
     }
 
     $navbar = "
@@ -25,16 +25,16 @@ function getNavbar($depth){
             <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
                 <ul class='nav navbar-nav navbar-right'>
                     <li>
-                        <a href=".$pwd."index.php>Home</a>
+                        <a href=".$root_dir."index.php>Home</a>
                     </li>
                     <li>
-                        <a href=".$pwd."writeups/>Writeups</a>
+                        <a href=".$root_dir."writeups/>Writeups</a>
                     </li>
                     <li>
-                         <a href=".$pwd."projects/>Projects</a>
+                         <a href=".$root_dir."projects/>Projects</a>
                     </li>
                     <li>
-                         <a href=".$pwd."about/>About</a>
+                         <a href=".$root_dir."about/>About</a>
                     </li>
                 </ul>
             </div>

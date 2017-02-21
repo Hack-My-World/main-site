@@ -1,6 +1,6 @@
 <?php
 function getHeaders($title){
-    $head = 
+    $head =
     "
     <head>
 
@@ -9,7 +9,7 @@ function getHeaders($title){
         <meta name='viewport' content='width=device-width, initial-scale=1'>
 
         <title>$title</title>
-        <link rel='shortcut icon' type='image/x-icon' href='../icons/favicon.ico' />
+        <link rel='icon' type='image/x-icon' href='favicon.ico' />
 
         <!-- Bootstrap Core CSS -->
         <link href='../css/bootstrap.min.css' rel='stylesheet'>
