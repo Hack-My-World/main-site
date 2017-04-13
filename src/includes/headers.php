@@ -14,6 +14,9 @@ function getHeaders($title, $depth){
 
       <title>$title</title>
       <link rel='icon' type='image/x-icon' href='".$root_dir."favicon.ico' />
+      <!-- Blockchain.info headers -->
+      <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script>
+      <script type='text/javascript' src='https://blockchain.info/Resources/js/pay-now-button.js'></script>
 
       <!-- Bootstrap Core CSS -->
       <link href='".$root_dir."css/bootstrap.min.css' rel='stylesheet'>

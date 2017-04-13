@@ -4,7 +4,7 @@ function getFooters(){
     <footer>
         <div class='container'>
             <div class='row'>
-                <div class='col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1'>
+                <div class='col-lg-9 col-lg-offset-7 col-md-10 col-md-offset-5'>
                     <ul class='list-inline text-center'>
                         <li>
                             <a href='https://twitter.com/_kablaa'>
