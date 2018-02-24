@@ -162,7 +162,7 @@ a.out: ELF 64-bit LSB  executable, x86-64, version 1 (SYSV), dynamically linked 
 
 <h3>Practice</h3>
 
-<p>Reversing binaries is inherently difficult, and learning to do it efficiently takes a great deal of time and practice. We suggest spending as much time as possible on sites like <a href="http://www.crackmes.de">crackmes.de</a> and <a href="http://reversing.kr/">reversing.kr</a> as well as writing and reversing your own binaries. There are even several <a href="http://www.ece.ualberta.ca/~marcin/aikonsoft/reverse.pdf">books</a> and <a href="http://manoharvanga.com/hackme/">tutorials</a> written and on the subject of reversing Linux binaries.</p>
+<p>Reversing binaries is inherently difficult, and learning to do it efficiently takes a great deal of time and practice. We suggest spending as much time as possible on sites like <a href="http://reversing.kr/">reversing.kr</a> as well as writing and reversing your own binaries. There are even several <a href="http://www.ece.ualberta.ca/~marcin/aikonsoft/reverse.pdf">books</a> and <a href="http://manoharvanga.com/hackme/">tutorials</a> written and on the subject of reversing Linux binaries.</p>
 
 
 
@@ -233,8 +233,8 @@ python exploit.py | ./&lt;binary&gt;
 
 <h1 id="bof">Buffer Overflows</h1>
 
-<p>A <a href="https://www.owasp.org/index.php/Buffer_overflow_attack">buffer overflow</a> is one of the simplest types of binary exploits. It is usually the first thing that is taught to aspiring hackers, so it will be the first thing we go over in this guide. There are many many <a href="http://www.thegeekstuff.com/2013/06/buffer-overflow/">examples</a>, <a href="https://www.exploit-db.com/docs/28475.pdf">tutorials</a>, and <a href="http://ehsandev.com/pico2014/binary_exploitation/overflow1.html">writeups</a> available online. My personal favorite is this
-<a href="https://picoctf.com/problem-static/binary/Overflow1/overflow1.html#1">interactive buffer overflow</a>, which provides an excellent visualization of exactly what is happening during the exploit.</p>
+<p>A <a href="https://www.owasp.org/index.php/Buffer_overflow_attack">buffer overflow</a> is one of the simplest types of binary exploits. It is usually the first thing that is taught to aspiring hackers, so it will be the first thing we go over in this guide. There are many many <a href="http://www.thegeekstuff.com/2013/06/buffer-overflow/">examples</a>, and <a href="http://ehsandev.com/pico2014/binary_exploitation/overflow1.html">writeups</a> available online. My personal favorite is this
+<a href="https://free.codebashing.com/free-content/cplus/c_stack_p1#/lesson/stack overflows/objectives?_k=hqlzvq">interactive buffer overflow</a>, which provides an excellent visualization of exactly what is happening during the exploit.</p>
 
 
 <h1 id = "tools">Tools</h1>
@@ -267,7 +267,7 @@ print myHexString
     </code>
 </pre>
 
-<p>To find out more, read through <a href="https://pwntools.readthedocs.org/en/2.2/">the documentation</a>.</p>
+<p>To find out more, read through <a href="https://docs.pwntools.com/en/stable/">the documentation</a>.</p>
 
 <h3>Python and GDB</h3>
 
